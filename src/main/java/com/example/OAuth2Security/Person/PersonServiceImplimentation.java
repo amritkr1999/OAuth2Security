@@ -3,6 +3,8 @@ package com.example.OAuth2Security.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class PersonServiceImplimentation implements PersonService{
 
@@ -20,5 +22,17 @@ public class PersonServiceImplimentation implements PersonService{
         return personRepository.save(personEntity);
         else
             throw new RuntimeException("Person already exists");
+    }
+
+    @Override
+    public PersonEntity login(Map<String,String> credentials) {
+        if(personRepository.findByEmail(credentials.get("email")).isPresent()){
+            if (personRepository.findByEmail(credentials.get("email")).get().getPassword().equals(credentials.get("password")))
+                return personRepository.findByEmail(credentials.get("email")).get();
+            else
+                throw new RuntimeException("Wrong password");
+        }
+        else
+            throw new RuntimeException("Person not found");
     }
 }
