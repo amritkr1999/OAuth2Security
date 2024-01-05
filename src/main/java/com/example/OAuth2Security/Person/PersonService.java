@@ -1,4 +1,8 @@
 package com.example.OAuth2Security.Person;
 
-public class PersonService {
+import org.springframework.stereotype.Service;
+
+public interface PersonService  {
+
+    public PersonEntity signup(PersonEntity personEntity);
 }
