@@ -3,12 +3,12 @@ package com.example.OAuth2Security.Person;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
 
-@Controller
+@RestController
 public class PersonController {
 
     private PersonService personService;
@@ -25,12 +25,23 @@ public class PersonController {
         return modelMapper.map(temp, PersonDTO.class);
     }
 
-    @PostMapping("/login")
-    public PersonDTO login(@RequestBody Map<String,String> Credentials){
-        PersonEntity temp = personService.login(Credentials);
+//    @PostMapping("/login")
+//    public PersonDTO login(@RequestBody Map<String,String> Credentials){
+//        PersonEntity temp = personService.login(Credentials);
+//        return modelMapper.map(temp, PersonDTO.class);
+//    }
+
+    @GetMapping("/showPersonDetails/")
+    public PersonDTO showPersonDetails(@RequestBody String email){
+        PersonEntity temp = personService.showPersonDetails(email);
         return modelMapper.map(temp, PersonDTO.class);
-
-
     }
+
+    @PutMapping("/editDetails")
+    public PersonEntity editDetails(@RequestBody PersonEntity personEntity){
+        PersonEntity temp = personService.editDetails(personEntity);
+        return personEntity;
+    }
+
 
 }

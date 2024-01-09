@@ -16,6 +16,8 @@ public class PersonServiceImplimentation implements PersonService{
         this.personRepository = personRepository;
     }
 
+
+
     @Override
     public PersonEntity signup(PersonEntity personEntity) {
         if(personRepository.findByEmail(personEntity.getEmail()).isEmpty())
@@ -34,5 +36,22 @@ public class PersonServiceImplimentation implements PersonService{
         }
         else
             throw new RuntimeException("Person not found");
+    }
+
+    @Override
+    public PersonEntity showPersonDetails(String email) {
+        if(personRepository.findByEmail(email).isPresent())
+            return personRepository.findByEmail(email).get();
+        else
+            throw new RuntimeException("Person not found");
+    }
+
+    @Override
+    public PersonEntity editDetails(PersonEntity personEntity){
+        if(personRepository.findByEmail((personEntity.getEmail())).isPresent())
+            return personRepository.saveAndFlush(personEntity);
+        else
+            throw new RuntimeException("Error in editing");
+
     }
 }

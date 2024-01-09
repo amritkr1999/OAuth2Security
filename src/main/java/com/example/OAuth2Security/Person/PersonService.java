@@ -8,4 +8,7 @@ public interface PersonService  {
 
     public PersonEntity signup(PersonEntity personEntity);
     public PersonEntity login(Map<String,String> credentials);
+    public PersonEntity showPersonDetails(String email);
+    public PersonEntity editDetails(PersonEntity personEntity);
+
 }
