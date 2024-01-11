@@ -47,11 +47,12 @@ public class AuthController {
 //    @CrossOrigin("http://localhost:4200")
     public ResponseEntity<JwtAuthResponse> createToken(@NotNull @RequestBody JwtAuthRequest request)
     {
+        System.out.println("*******************************");
 //        this.password = request.getPassword();
         UserDetails userDetails = this.service.loadUserByUsername(request.getEmail());
         this.authenticate(request.getEmail(), request.getPassword());
         String generateToken = this.helper.generateToken(userDetails);
-//        System.out.println("*******************************" +generateToken);
+
         JwtAuthResponse authResponse = new JwtAuthResponse();
         authResponse.setAccessToken(generateToken);
         authResponse.setMessage("User logged in");

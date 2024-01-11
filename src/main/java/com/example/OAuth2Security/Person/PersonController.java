@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/auth")
 public class PersonController {
 
     private PersonService personService;
@@ -19,10 +20,15 @@ public class PersonController {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("/signup")
+    @RequestMapping(value = "", method = RequestMethod.POST)
     public PersonDTO signup(@RequestBody PersonEntity personEntity){
         PersonEntity temp = personService.signup(personEntity);
         return modelMapper.map(temp, PersonDTO.class);
+    }
+
+    @GetMapping("")
+    public void helloWorld() {
+        System.out.println("Hello World!");
     }
 
 //    @PostMapping("/login")
@@ -31,7 +37,7 @@ public class PersonController {
 //        return modelMapper.map(temp, PersonDTO.class);
 //    }
 
-    @GetMapping("/showPersonDetails/")
+    @GetMapping("/showPersonDetails")
     public PersonDTO showPersonDetails(@RequestBody String email){
         PersonEntity temp = personService.showPersonDetails(email);
         return modelMapper.map(temp, PersonDTO.class);
