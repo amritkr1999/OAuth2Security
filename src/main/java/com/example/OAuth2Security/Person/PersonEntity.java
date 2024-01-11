@@ -21,7 +21,7 @@ import java.util.UUID;
 public class PersonEntity implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String email;
     private String name;

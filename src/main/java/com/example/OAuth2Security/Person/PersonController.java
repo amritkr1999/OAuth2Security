@@ -20,7 +20,7 @@ public class PersonController {
         this.modelMapper = modelMapper;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public PersonDTO signup(@RequestBody PersonEntity personEntity){
         PersonEntity temp = personService.signup(personEntity);
         return modelMapper.map(temp, PersonDTO.class);
